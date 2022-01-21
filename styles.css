@@ -22,7 +22,7 @@ body {
      cursor: pointer;
      font-size: 30px;
      border: solid #ffffff 1px;
-     border-radius: 10px;
+     border-radius: 50px;
      /* outline: none; */
      background-color: #f1f1f1;
      opacity: 75%;
@@ -35,4 +35,28 @@ body {
 
  .span-two {
      grid-column: span 2;
+ }
+
+ .output {
+     grid-column: 1 / -1;
+     background-color: #332d2d;
+     opacity: 75%;
+     border-radius: 25px;
+     /* color: #ffffff; */
+     padding: 10px;
+     display: flex;
+     align-items: flex-end;
+     justify-content: space-around;
+     flex-direction: column;
+    
+ }
+
+ .output .previous-operand {
+    color: #ffffff;
+    font-size: 20px;
+ }
+
+ .output .current-operand {
+    color: #ffffff;
+    font-size: 45px;
  }
