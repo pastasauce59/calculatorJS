@@ -26,14 +26,23 @@ let previous = document.getElementsByClassName('previous-operand')[0]
             current.append(result)
             // current.append( parseInt(previous.innerText) / parseInt(current.innerText) ) 
         }
-        else if (button.innerText === '*'){
-            current.append( parseInt(previous.innerText) * parseInt(current.innerText) )
+        else if (previous.innerText.includes('*')){
+            let result = parseFloat(previous.innerText) * parseFloat(current.innerText);
+            previous.innerText ='';
+            current.innerText = '';
+            current.append(result)
         }
-        else if (button.innerText === '+'){
-            current.append( parseInt(previous.innerText) + parseInt(current.innerText) ) 
+        else if (previous.innerText.includes('+')){
+            let result = parseFloat(previous.innerText) + parseFloat(current.innerText);
+            previous.innerText ='';
+            current.innerText = '';
+            current.append(result) 
         }
-        else if (button.innerText === '-'){
-            current.append( parseInt(previous.innerText) - parseInt(current.innerText) )
+        else if (previous.innerText.includes('-')){
+            let result = parseFloat(previous.innerText) - parseFloat(current.innerText);
+            previous.innerText ='';
+            current.innerText = '';
+            current.append(result)
         }
     }
 
