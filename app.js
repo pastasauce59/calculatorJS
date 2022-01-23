@@ -79,6 +79,12 @@ let previous = document.getElementsByClassName('previous-operand')[0]
     if (button.innerText === '='){
         compute()
     }
+
+    if (button.innerText === 'DEL'){
+        let newCurrent = current.innerText.slice(0,-1)
+        current.innerText = ''
+        current.append(newCurrent)
+    }
     
 
 }) 
