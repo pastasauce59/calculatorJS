@@ -71,9 +71,16 @@ let previous = document.getElementsByClassName('previous-operand')[0]
         button.innerText === '+' ||
         button.innerText === '-'){
             // console.log('computation button')
+           if (previous.innerText === ''){
             current.append(button.innerText);
             previous.innerText = current.innerText
             current.innerText = ''
+           }
+           else if (!previous.innerText.includes(button.innerText)){
+                let newComputation = previous.innerText.slice(0,-1)
+                previous.innerText = newComputation
+                previous.append(button.innerText)
+            }
     }
 
     if (button.innerText === '='){
