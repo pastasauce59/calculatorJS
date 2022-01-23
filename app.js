@@ -84,6 +84,7 @@ let previous = document.getElementsByClassName('previous-operand')[0]
     }
 
     if (button.innerText === '='){
+        if(current.innerText !== '')
         compute()
     }
 
