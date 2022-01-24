@@ -14,7 +14,7 @@ let previous = document.getElementsByClassName('previous-operand')[0]
             if (current.innerText !== ''){
                 current.innerText = ''
             }
-            else (current.innerText = previous.innerText, previous.innerText = '')
+            else (current.innerText = previous.innerText.slice(0,-1), previous.innerText = '')
         }
     }
 
