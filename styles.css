@@ -62,3 +62,12 @@ body {
     color: #ffffff;
     font-size: 45px;
  }
+
+ .calculator-grid .operation, .calculator-grid .span-two {
+    background-color:#e2aa31;
+    color: white;
+ }
+
+ .calculator-grid .operation:hover, .calculator-grid .span-two:hover {
+    background-color:#dfdcd3;
+ }

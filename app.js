@@ -93,6 +93,15 @@ let previous = document.getElementsByClassName('previous-operand')[0]
         current.innerText = ''
         current.append(newCurrent)
     }
+
+    if (button.innerText === '+/--'){
+        if(current.innerText[0] === '-'){
+            let removeNegative = current.innerText.slice(1)
+            current.innerText = ''
+            current.append(removeNegative)
+        }
+        else(current.prepend('-'))
+    }
     
 
 }) 
