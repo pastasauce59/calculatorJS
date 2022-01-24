@@ -71,15 +71,15 @@ let previous = document.getElementsByClassName('previous-operand')[0]
         button.innerText === '+' ||
         button.innerText === '-'){
             // console.log('computation button')
-           if (previous.innerText === ''){
-            current.append(button.innerText);
+           if (previous.innerText === '' && current.innerText.length > 0){
+            current.append(` ${button.innerText}`);
             previous.innerText = current.innerText
             current.innerText = ''
            }
-           else if (!previous.innerText.includes(button.innerText)){
+           else if (!previous.innerText.includes(button.innerText) && previous.innerText.length > 0){
                 let newComputation = previous.innerText.slice(0,-1)
                 previous.innerText = newComputation
-                previous.append(button.innerText)
+                previous.append(` ${button.innerText}`)
             }
     }
 
@@ -94,7 +94,7 @@ let previous = document.getElementsByClassName('previous-operand')[0]
         current.append(newCurrent)
     }
 
-    if (button.innerText === '+/--'){
+    if (button.innerText === '+/-'){
         if(current.innerText[0] === '-'){
             let removeNegative = current.innerText.slice(1)
             current.innerText = ''
