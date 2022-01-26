@@ -3,10 +3,26 @@
 let numberButtons = document.querySelectorAll('button')
 let current = document.getElementsByClassName('current-operand')[0]
 let previous = document.getElementsByClassName('previous-operand')[0]
+let result
 
-    
+
     numberButtons.forEach(button => button.addEventListener('click', () => {
     // console.log(button.innerText)
+        
+    
+    // if (!isNaN(parseFloat(current.innerText))){
+    //     let newNum
+    // while (current.innerText.includes(',')){
+    //     newNum = current.innerText.replace(',','');
+    //     current.innerText = newNum
+    //     }
+    //     current.innerText = parseFloat(current.innerText).toLocaleString('en');
+    // }
+
+    // if (current.innerText[3]){
+    //     current.append(',')
+    //     }
+    
 
     let clear = () => {
         // button.innerText === 'AC' ? current.innerText = '' : null
@@ -18,40 +34,65 @@ let previous = document.getElementsByClassName('previous-operand')[0]
         }
     }
 
+    // let removeCommas = (numbers) => {
+    //     let newNum
+    //     while (numbers.includes(',')){
+    //         newNum = numbers.replace(',','');
+    //         newNum
+    //         }
+    //         current.innerText = parseFloat(numbers).toLocaleString('en');
+    // }
+
     let compute = () => {
-        if (previous.innerText.includes('÷')) {
-            let result = parseFloat(previous.innerText) / parseFloat(current.innerText);
+        if (current.innerText !== '' && button.innerText === '%'){
+            current.innerText = parseFloat(current.innerText) / 100;
+        }
+        else if (previous.innerText.includes('÷')) {
+            result = parseFloat(previous.innerText) / parseFloat(current.innerText);
             previous.innerText ='';
-            current.innerText = '';
-            current.append(result)
-            // current.append( parseInt(previous.innerText) / parseInt(current.innerText) ) 
+            current.innerText = result;
+            // current.append(result) 
         }
         else if (previous.innerText.includes('*')){
-            let result = parseFloat(previous.innerText) * parseFloat(current.innerText);
+            result = parseFloat(previous.innerText) * parseFloat(current.innerText);
             previous.innerText ='';
-            current.innerText = '';
-            current.append(result)
+            current.innerText = result;
+            // current.append(result)
         }
         else if (previous.innerText.includes('+')){
-            let result = parseFloat(previous.innerText) + parseFloat(current.innerText);
+            result = parseFloat(previous.innerText) + parseFloat(current.innerText);
             previous.innerText ='';
-            current.innerText = '';
-            current.append(result) 
+            current.innerText = result;
+            // current.append(result) 
         }
         else if (previous.innerText.includes('-')){
-            let result = parseFloat(previous.innerText) - parseFloat(current.innerText);
+            result = parseFloat(previous.innerText) - parseFloat(current.innerText);
             previous.innerText ='';
-            current.innerText = '';
-            current.append(result)
+            current.innerText = result;
+            // current.append(result)
         }
+        // else if (current.innerText !== '' && button.innerText === '%'){
+        //     current.innerText = parseFloat(current.innerText) / 100;
+        // }
     }
-
-    // if (current.innerText !== ''){
-    //     numberButtons[0].innerText = 'C'
-    // }
+    
     
     if (parseInt(button.innerText) >= 0 ){
-        current.append(button.innerText)   
+        if (result !== ''){
+            result = '';
+            current.innerText = ''
+        }
+        current.append(button.innerText)
+        //logic for inserting commas to display numbers
+
+        // if (!isNaN(parseFloat(current.innerText))){
+        //     let newNum
+        // while (current.innerText.includes(',')){
+        //     newNum = current.innerText.replace(',','');
+        //     current.innerText = newNum
+        //     }
+        //     current.innerText = parseFloat(current.innerText).toLocaleString('en', {maximumFractionDigits: 20});
+        // }  
     }
 
     if (button.innerText === 'AC'){
@@ -59,6 +100,10 @@ let previous = document.getElementsByClassName('previous-operand')[0]
     }
 
     if (button.innerText === '.'){
+        if (result !== ''){
+            result = '';
+            current.innerText = ''
+        }
         if(current.innerText.includes('.')){
             return
         }
@@ -70,7 +115,6 @@ let previous = document.getElementsByClassName('previous-operand')[0]
         button.innerText === '*' || 
         button.innerText === '+' ||
         button.innerText === '-'){
-            // console.log('computation button')
            if (previous.innerText === '' && current.innerText.length > 0){
             current.append(` ${button.innerText}`);
             previous.innerText = current.innerText
@@ -83,16 +127,19 @@ let previous = document.getElementsByClassName('previous-operand')[0]
             }
     }
 
-    if (button.innerText === '='){
+    if (button.innerText === '=' || button.innerText === '%'){
         if(current.innerText !== '')
         compute()
     }
 
-    if (button.innerText === 'DEL'){
-        let newCurrent = current.innerText.slice(0,-1)
-        current.innerText = ''
-        current.append(newCurrent)
-    }
+    //Leaving the delete button logic here incase I revamp the calculator and include this again
+
+    // if (button.innerText === 'DEL'){
+    //     let newCurrent = current.innerText.slice(0,-1)
+    //     current.innerText = ''
+    //     current.append(newCurrent)
+    // }
+
 
     if (button.innerText === '+/-'){
         if(current.innerText[0] === '-'){
