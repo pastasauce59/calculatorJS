@@ -19,21 +19,12 @@ let result
         }
     }
 
-    // let removeCommas = (numbers) => {
-    //     let newNum
-    //     while (numbers.includes(',')){
-    //         newNum = numbers.replace(',','');
-    //         newNum
-    //         }
-    //         current.innerText = parseFloat(numbers).toLocaleString('en');
-    // }
-
     let compute = () => {
             currentNoCommas = current.innerText.replaceAll(',','');
             previousNoCommas = previous.innerText.replaceAll(',','');
 
         if (current.innerText !== '' && button.innerText === '%'){
-            current.innerText = parseFloat(current.innerText) / 100;
+            current.innerText = (parseFloat(currentNoCommas) / 100).toLocaleString('en', {maximumFractionDigits:20})
         }
         else if (previous.innerText.includes('÷')) {
             result = parseFloat(previousNoCommas) / parseFloat(currentNoCommas);
@@ -66,23 +57,31 @@ let result
     }
     
     
-    if (parseInt(button.innerText) >= 0 ){
+    if (parseFloat(button.innerText) >= 0 ){
         if (result !== ''){
             result = '';
             current.innerText = '';
         }
         current.append(button.innerText)
-        //logic for inserting commas to display numbers
 
-        if (!isNaN(parseFloat(current.innerText))){
-            let newNum
-        while (current.innerText.includes(',')){
-            newNum = current.innerText.replace(',','');
-            current.innerText = newNum
-            }
-            current.innerText = parseFloat(current.innerText).toLocaleString('en', {maximumFractionDigits: 20});
-        }  
-    }
+        let beforeDec = current.innerText.split('.')[0]
+        let afterDec = current.innerText.split('.')[1]
+        let integerDisplay
+    while (beforeDec.includes(',')){
+        beforeDec = beforeDec.replace(',','');
+        current.innerText = beforeDec
+        }
+        if (isNaN(beforeDec)){
+            return
+        } else{
+           beforeDec = parseFloat(beforeDec).toLocaleString('en', {maximumFractionDigits: 20})
+        }
+        if (afterDec !== undefined){
+        current.innerText = `${beforeDec}.${afterDec}`;
+        } else {
+            current.innerText = beforeDec
+        }
+    }  
 
     if (button.innerText === 'AC'){
         clear()
@@ -96,7 +95,11 @@ let result
         if(current.innerText.includes('.')){
             return
         }
-        else (current.append(button.innerText))
+        else if(current.innerText === '' && !current.innerText.includes('.') ){
+            current.append(`0${button.innerText}`)
+        } else {
+            current.append(button.innerText)
+        }
         
     }
 
