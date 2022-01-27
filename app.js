@@ -3,29 +3,14 @@
 let numberButtons = document.querySelectorAll('button')
 let current = document.getElementsByClassName('current-operand')[0]
 let previous = document.getElementsByClassName('previous-operand')[0]
+let currentNoCommas
+let previousNoCommas
 let result
 
 
     numberButtons.forEach(button => button.addEventListener('click', () => {
-    // console.log(button.innerText)
-        
     
-    // if (!isNaN(parseFloat(current.innerText))){
-    //     let newNum
-    // while (current.innerText.includes(',')){
-    //     newNum = current.innerText.replace(',','');
-    //     current.innerText = newNum
-    //     }
-    //     current.innerText = parseFloat(current.innerText).toLocaleString('en');
-    // }
-
-    // if (current.innerText[3]){
-    //     current.append(',')
-    //     }
-    
-
-    let clear = () => {
-        // button.innerText === 'AC' ? current.innerText = '' : null
+        let clear = () => {
         if (button.innerText === 'AC'){
             if (current.innerText !== ''){
                 current.innerText = ''
@@ -44,55 +29,59 @@ let result
     // }
 
     let compute = () => {
+            currentNoCommas = current.innerText.replaceAll(',','');
+            previousNoCommas = previous.innerText.replaceAll(',','');
+
         if (current.innerText !== '' && button.innerText === '%'){
             current.innerText = parseFloat(current.innerText) / 100;
         }
         else if (previous.innerText.includes('÷')) {
-            result = parseFloat(previous.innerText) / parseFloat(current.innerText);
+            result = parseFloat(previousNoCommas) / parseFloat(currentNoCommas);
             previous.innerText ='';
-            current.innerText = result;
+            current.innerText = result.toLocaleString('en', {maximumFractionDigits: 20});
             // current.append(result) 
         }
         else if (previous.innerText.includes('*')){
-            result = parseFloat(previous.innerText) * parseFloat(current.innerText);
+            result = parseFloat(previousNoCommas) * parseFloat(currentNoCommas);
             previous.innerText ='';
-            current.innerText = result;
+            current.innerText = result.toLocaleString('en', {maximumFractionDigits: 20});
             // current.append(result)
         }
         else if (previous.innerText.includes('+')){
-            result = parseFloat(previous.innerText) + parseFloat(current.innerText);
+            result = parseFloat(previousNoCommas) + parseFloat(currentNoCommas);
             previous.innerText ='';
-            current.innerText = result;
+            current.innerText = result.toLocaleString('en', {maximumFractionDigits: 20});
             // current.append(result) 
         }
         else if (previous.innerText.includes('-')){
-            result = parseFloat(previous.innerText) - parseFloat(current.innerText);
+            result = parseFloat(previousNoCommas) - parseFloat(currentNoCommas);
             previous.innerText ='';
-            current.innerText = result;
+            current.innerText = result.toLocaleString('en', {maximumFractionDigits: 20});
             // current.append(result)
         }
-        // else if (current.innerText !== '' && button.innerText === '%'){
-        //     current.innerText = parseFloat(current.innerText) / 100;
-        // }
+
+        currentNoCommas = '';
+        previousNoCommas = '';
+    
     }
     
     
     if (parseInt(button.innerText) >= 0 ){
         if (result !== ''){
             result = '';
-            current.innerText = ''
+            current.innerText = '';
         }
         current.append(button.innerText)
         //logic for inserting commas to display numbers
 
-        // if (!isNaN(parseFloat(current.innerText))){
-        //     let newNum
-        // while (current.innerText.includes(',')){
-        //     newNum = current.innerText.replace(',','');
-        //     current.innerText = newNum
-        //     }
-        //     current.innerText = parseFloat(current.innerText).toLocaleString('en', {maximumFractionDigits: 20});
-        // }  
+        if (!isNaN(parseFloat(current.innerText))){
+            let newNum
+        while (current.innerText.includes(',')){
+            newNum = current.innerText.replace(',','');
+            current.innerText = newNum
+            }
+            current.innerText = parseFloat(current.innerText).toLocaleString('en', {maximumFractionDigits: 20});
+        }  
     }
 
     if (button.innerText === 'AC'){
