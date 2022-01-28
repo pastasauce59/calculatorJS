@@ -1,5 +1,3 @@
-// need number buttons, operand buttons, misc. buttons
-
 let numberButtons = document.querySelectorAll('button')
 let current = document.getElementsByClassName('current-operand')[0]
 let previous = document.getElementsByClassName('previous-operand')[0]
@@ -29,26 +27,22 @@ let result
         else if (previous.innerText.includes('÷')) {
             result = parseFloat(previousNoCommas) / parseFloat(currentNoCommas);
             previous.innerText ='';
-            current.innerText = result.toLocaleString('en', {maximumFractionDigits: 20});
-            // current.append(result) 
+            current.innerText = result.toLocaleString('en', {maximumFractionDigits: 20}); 
         }
         else if (previous.innerText.includes('*')){
             result = parseFloat(previousNoCommas) * parseFloat(currentNoCommas);
             previous.innerText ='';
             current.innerText = result.toLocaleString('en', {maximumFractionDigits: 20});
-            // current.append(result)
         }
         else if (previous.innerText.includes('+')){
             result = parseFloat(previousNoCommas) + parseFloat(currentNoCommas);
             previous.innerText ='';
-            current.innerText = result.toLocaleString('en', {maximumFractionDigits: 20});
-            // current.append(result) 
+            current.innerText = result.toLocaleString('en', {maximumFractionDigits: 20}); 
         }
         else if (previous.innerText.includes('-')){
             result = parseFloat(previousNoCommas) - parseFloat(currentNoCommas);
             previous.innerText ='';
             current.innerText = result.toLocaleString('en', {maximumFractionDigits: 20});
-            // current.append(result)
         }
 
         currentNoCommas = '';
