@@ -71,3 +71,10 @@ body {
  .calculator-grid .operation:hover, .calculator-grid .span-two:hover {
     background-color:#dfdcd3;
  }
+
+ @media only screen and (max-width: 400px) {
+    .calculator-grid {
+        grid-template-columns: repeat(4, 90px);
+        grid-template-rows: minmax(110px, auto) repeat(5, 90px);
+    }
+ }
